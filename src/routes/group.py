@@ -21,5 +21,20 @@ async def create_group(body: GroupRegistrerDTO):
 
 @router.get("/")
 async def get_groups():
-    groups = await Group.all()
-    return [{"id": group.id, "name": group.name, "date": group.formatted_date} for group in groups]
+    groups = await Group.all().prefetch_related("participants") 
+    return [
+        {
+            "id": group.id,
+            "name": group.name,
+            "date": group.formatted_date,
+            "participants": [
+                {
+                    "id": participant.id,
+                    "name": participant.name,
+                    "email": participant.email
+                }
+                for participant in group.participants
+            ],
+        }
+        for group in groups
+    ]

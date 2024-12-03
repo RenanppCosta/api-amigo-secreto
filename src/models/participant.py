@@ -6,5 +6,5 @@ class Participant(Model):
     name = fields.CharField(max_length=120)
     email = fields.CharField(max_length=200)
     group = fields.ForeignKeyField("models.Group", related_name="participants")
-    
+    match = fields.ForeignKeyField("models.Participant", null=True)
 
