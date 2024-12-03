@@ -10,7 +10,10 @@ def config_db(app: FastAPI):
             },
             "apps": {
                 "models": {
-                    "models": ["src.models.participant"],
+                    "models": [
+                        "src.models.participant",
+                        "src.models.group"
+                    ],
                     "default_connection": "default",
                 }
             },
