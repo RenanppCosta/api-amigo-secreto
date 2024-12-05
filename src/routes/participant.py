@@ -80,3 +80,10 @@ async def create_matches(group_id: int):
    
     return {"matches": "Created Matches!"}
 
+@router.get("{participant_id}/match")
+async def get_match_by_participant(participant_id: int):
+    participant = await Participant.get(id=participant_id).select_related("match")
+
+    return{
+        "match": participant.match.name
+    }
