@@ -2,6 +2,7 @@ from fastapi import APIRouter, HTTPException
 from src.dtos.participants import ParticipantRegistrerDTO
 from src.models.participant import Participant
 from src.models.group import Group
+from src.utils.email import send_match_email
 import random 
 
 router = APIRouter(
@@ -76,7 +77,13 @@ async def create_matches(group_id: int):
         await participant.save()
         list_id.remove(match_id)
 
-
+        await send_match_email(
+            receiver_email=participant.email,
+            participant_name=participant.name,
+            match_name=participant.match.name,
+            group_name=group.name,
+            group_date=group.formatted_date
+        )
    
     return {"matches": "Created Matches!"}
 
