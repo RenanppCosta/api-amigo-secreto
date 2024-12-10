@@ -89,7 +89,15 @@ async def create_matches(group_id: int):
 
 @router.get("{participant_id}/match")
 async def get_match_by_participant(participant_id: int):
-    participant = await Participant.get(id=participant_id).select_related("match")
+    participant = await Participant.get(id=participant_id).select_related("match", "group")
+
+    await send_match_email(
+            receiver_email=participant.email,
+            participant_name=participant.name,
+            match_name=participant.match.name,
+            group_name=participant.group.name,
+            group_date=participant.group.formatted_date
+        )
 
     return{
         "match": participant.match.name
