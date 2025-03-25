@@ -12,7 +12,8 @@ def config_db(app: FastAPI):
                 "models": {
                     "models": [
                         "src.models.participant",
-                        "src.models.group"
+                        "src.models.group",
+                        "src.models.user"
                     ],
                     "default_connection": "default",
                 }
