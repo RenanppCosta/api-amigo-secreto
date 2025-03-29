@@ -3,6 +3,7 @@ from src.dtos.users import UserRegistrerDTO, UserLoginDTO
 from src.models.user import User
 from src.exceptions.user import login_wrong, email_already_exist
 from src.utils.auth import hash_password, verify_password
+from src.utils.jwt import create_access_token
 
 router = APIRouter(
     prefix="/users",
@@ -39,7 +40,8 @@ async def login(body: UserLoginDTO):
     except Exception:
         return login_wrong()
     
-    if user.password != body.password:
+    if verify_password(body.password, user.password):
         return login_wrong()
     
-    return user
+    token = create_access_token(body)
+    return {"token": token, "token_type": "bearer"}
