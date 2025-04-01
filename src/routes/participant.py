@@ -1,8 +1,10 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from src.dtos.participants import ParticipantRegistrerDTO
 from src.models.participant import Participant
 from src.models.group import Group
+from src.models.user import User
 from src.utils.email import send_match_email
+from src.middlewares.auth import get_current_user
 import random 
 
 router = APIRouter(
@@ -12,11 +14,14 @@ router = APIRouter(
 )
 
 @router.post("/")
-async def register_participant(body: ParticipantRegistrerDTO):
+async def register_participant(body: ParticipantRegistrerDTO, user_logged: User = Depends(get_current_user)):
     group = await Group.get(id= body.group)
     
     if not group:
         raise HTTPException(status_code=404, detail="Group not found")
+    
+    if user_logged.id != group.created_by.id:
+        raise HTTPException(status_code=403, detail="You are not the admin of this group")
     
     participant = await Participant.create(
         name = body.name,
@@ -32,11 +37,14 @@ async def register_participant(body: ParticipantRegistrerDTO):
     }}
 
 @router.get("/{group_id}")
-async def get_participants_by_group(group_id: int):
+async def get_participants_by_group(group_id: int, user_logged: User = Depends(get_current_user)):
     group = await Group.get(id=group_id)
 
     if not group:
         raise HTTPException(status_code=404, detail="Group not found")
+    
+    if user_logged.id != group.created_by.id:
+        raise HTTPException(status_code=403, detail="You are not the admin of this group")
 
     participants = await Participant.filter(group=group).all().select_related("group")
 
@@ -52,16 +60,19 @@ async def get_participants_by_group(group_id: int):
     }
 
 @router.patch("/{group_id}")
-async def create_matches(group_id: int):
+async def create_matches(group_id: int, user_logged: User = Depends(get_current_user)):
     group = await Group.get(id=group_id)
 
     list_id = []
 
     if not group:
         raise HTTPException(status_code=404, detail="Group not found")
+    
+    if user_logged.id != group.created_by.id:
+        raise HTTPException(status_code=403, detail="You are not the admin of this group")
 
     participants = await Participant.filter(group=group).all()
-
+    
     for participant in participants:
         list_id.append(participant.id)
     
@@ -88,8 +99,15 @@ async def create_matches(group_id: int):
     return {"matches": "Created Matches!"}
 
 @router.get("{participant_id}/match")
-async def get_match_by_participant(participant_id: int):
+async def get_match_by_participant(participant_id: int, user_logged: User = Depends(get_current_user)):
+    
     participant = await Participant.get(id=participant_id).select_related("match", "group")
+
+    if not participant:
+        raise HTTPException(status_code=404, detail="Participant not found")
+
+    if user_logged.id != participant.group.created_by.id:
+        raise HTTPException(status_code=403, detail="You are not the admin of this group")
 
     await send_match_email(
             receiver_email=participant.email,
@@ -100,5 +118,5 @@ async def get_match_by_participant(participant_id: int):
         )
 
     return{
-        "match": participant.match.name
+        "match": "Resended Match!"
     }
