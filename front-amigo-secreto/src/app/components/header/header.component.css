@@ -44,7 +44,17 @@ header nav a{
   align-items: center;
   gap: 6px;
   font-weight: 500;
+  transition: color 0.3s ease;
 }
+
+header nav a:hover{
+  color: #b1afad;
+}
+
+header nav a.active{
+  color: #FF4000;
+}
+
 
 header button{
   background-color: #FF4000;
@@ -56,4 +66,10 @@ header button{
   display: flex;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease ;
+}
+
+header button:hover{
+  background-color: #c43202;
 }
