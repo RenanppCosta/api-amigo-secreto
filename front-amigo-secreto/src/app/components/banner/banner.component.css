@@ -115,3 +115,52 @@
 .banner-box button:hover{
     background-color: #c43202;
 }
+
+.why-us{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 48px;
+}
+
+.why-us h3{
+    font-size: 30px;
+}
+
+.features-container{
+    max-width: 1400px;
+    display: flex;
+    gap: 32px;
+}
+
+
+.features-card{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1px solid rgb(194, 194, 194);
+    border-radius: 12px;
+    gap: 16px;
+    padding: 20px 16px;
+    margin: 48px 0;
+}
+
+.features-card div{
+    background-color: #fac7b7;
+    padding: 20px;
+    border-radius: 9999px;
+}
+
+.features-card span{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.features-card p{
+    color: #78716C;
+    font-weight: 600;
+}
