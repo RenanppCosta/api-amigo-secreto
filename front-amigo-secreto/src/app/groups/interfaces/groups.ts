@@ -1,5 +1,5 @@
 export interface Groups{
     name: string
-    date: string
+    date: Date
     numParticipants: number
 }
