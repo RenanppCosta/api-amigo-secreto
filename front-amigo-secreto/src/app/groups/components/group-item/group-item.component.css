@@ -1,0 +1,40 @@
+.card-group{
+    border: 2px solid rgb(219, 219, 219);
+    padding: 24px;
+    border-radius: 10px;
+    width: 33%;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.card-group:hover{
+    border: 2px solid #ff7a4d;
+    scale: 105%;
+}
+
+.group-info{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    color: #78716C;
+    margin-bottom: 8px;
+}
+
+.group-info h3{
+    color: #ff4000;
+    font-size: 20px;
+}
+
+.see-details{
+    padding-top: 16px;
+    border-top: 1px solid rgb(219, 219, 219);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.see-details div span{
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 12px;
+}

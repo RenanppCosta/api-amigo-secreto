@@ -1,7 +1,14 @@
-<div>
-    <div>
+<div class="card-group">
+    <div class="group-info">
         <h3>{{group.name}}</h3>
-        <span>{{group.date}}</span>
-        <span>{{group.numParticipants}}</span>
+        <span class="num-participants-group"><i class="fa-solid fa-user fa-sm" style="color: #78716C"></i> {{group.numParticipants}} participantes</span>
+        <span class="date-group"><i class="fa-regular fa-calendar fa-sm" style="color: #78716C"></i> Evento: {{group.date}}</span>
+    </div>
+    <div class="see-details">
+        <div>
+            <i class="fa-solid fa-gift fa-sm" style="color: #ff4000;"></i>
+            <span>Ver detalhes</span>
+        </div>
+        <i class="fa-solid fa-chevron-right"></i>
     </div>
 </div>

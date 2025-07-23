@@ -1,0 +1,37 @@
+.recents-group{
+    max-width: 1400px;
+    margin: 0 auto;
+    left: 0;
+    margin-top: 48px;
+}
+
+.recents-group-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.recents-group-title h3{
+    font-size: 30px;
+}
+
+.recents-group-title button{
+    border: 1px solid rgb(219, 219, 219);
+    background-color: white;
+    padding: 8px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+}
+
+.recents-group-title button:hover{
+    background-color: rgb(197, 197, 197);
+}
+
+.container-card-group{
+    margin: 32px 0;
+}
