@@ -4,6 +4,6 @@
         <button>Ver todos <i class="fa-solid fa-arrow-right"></i></button>
     </div>
     <div class="container-card-group">
-        <app-group-item [group]="group"></app-group-item>
+        <app-group-item *ngFor="let group of groups" [group]="group"></app-group-item>
     </div>
 </section>

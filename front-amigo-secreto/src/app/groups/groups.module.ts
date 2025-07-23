@@ -11,7 +11,7 @@ import { GroupItemComponent } from './components/group-item/group-item.component
   declarations: [
     GroupsComponent,
     RecentGroupsListComponent,
-    GroupItemComponent
+    GroupItemComponent,
   ],
   imports: [
     CommonModule,

@@ -2,7 +2,6 @@
     border: 2px solid rgb(219, 219, 219);
     padding: 24px;
     border-radius: 10px;
-    width: 33%;
     transition: all 0.3s ease;
     cursor: pointer;
 }
