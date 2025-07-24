@@ -7,3 +7,45 @@
 main {
   flex: 1;
 }
+
+.start-group{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  padding: 64px 0;
+  gap: 24px;
+  background-color: rgba(219, 55, 0, 0.1);
+  margin-top: 24px;
+}
+
+.start-group h4{
+  font-size: 30px;
+}
+
+.start-group p{
+  font-size: 20px;
+  color: #78716C;
+  max-width: 672px;
+}
+
+.start-group button{
+  background-color: #ff4000;
+  border: 0;
+  border-radius: 6px;
+  padding: 14px 40px;
+  color: white;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.start-group button:hover{
+  background-color: #c43202;
+}
