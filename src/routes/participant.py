@@ -15,8 +15,8 @@ router = APIRouter(
 
 @router.post("/")
 async def register_participant(body: ParticipantRegistrerDTO, user_logged: User = Depends(get_current_user)):
-    group = await Group.get(id= body.group)
-    
+    group = await Group.get(id=body.group).select_related("created_by")
+
     if not group:
         raise HTTPException(status_code=404, detail="Group not found")
     
@@ -38,7 +38,7 @@ async def register_participant(body: ParticipantRegistrerDTO, user_logged: User 
 
 @router.get("/{group_id}")
 async def get_participants_by_group(group_id: int, user_logged: User = Depends(get_current_user)):
-    group = await Group.get(id=group_id)
+    group = await Group.get(id=group_id).select_related("created_by")
 
     if not group:
         raise HTTPException(status_code=404, detail="Group not found")
@@ -61,7 +61,7 @@ async def get_participants_by_group(group_id: int, user_logged: User = Depends(g
 
 @router.patch("/{group_id}")
 async def create_matches(group_id: int, user_logged: User = Depends(get_current_user)):
-    group = await Group.get(id=group_id)
+    group = await Group.get(id=group_id).select_related("created_by")
 
     list_id = []
 
